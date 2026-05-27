@@ -145,9 +145,22 @@
             mix-blend-mode: screen;
             opacity: 0;
         }
-#scratchCard{
-    touch-action:none;
+#scratchCard {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
 }
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+img, canvas {
+    max-width: 100%;
+    height: auto;
+}
+        
     </style>
 </head>
 
@@ -255,10 +268,9 @@ style="font-family: 'Great Vibes', cursive;">
                     In the name of Allah, The most gracious, The most merciful</p>
                 <p>                                                                       </p>
 
-                <h1
-                    class="gsap-hero-reveal font-script text-7xl md:text-9xl text-cream mb-6 transform translate-y-10 opacity-0 text-shadow-gold">
-                    Zubair <span class="text-gold-500">&</span> Hameeda
-                </h1>
+                <h1 class="gsap-hero-reveal font-script text-4xl sm:text-5xl md:text-7xl text-cream mb-6 transform translate-y-10 opacity-0 text-shadow-gold text-center px-4">
+    Zubair <span class="text-gold-500">&</span> Hameeda
+</h1>
 
                 <p
                     class="gsap-hero-reveal font-serif text-xl md:text-2xl text-gold-200 mb-10 transform translate-y-10 opacity-0">
@@ -272,8 +284,7 @@ style="font-family: 'Great Vibes', cursive;">
     <div class="relative w-[340px] h-[130px] rounded-2xl overflow-hidden">
 
         <!-- Hidden Content -->
-        <div
-            class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-r from-yellow-200 via-gold-500 to-yellow-300 rounded-2xl z-0">
+        <div class="relative p-6 sm:p-10 max-w-[90vw] sm:max-w-md border-4 border-double border-gold-500/50 bg-black/30 backdrop-blur-sm rounded-lg shadow-2xl text-center">
 
             <p class="uppercase tracking-[0.3em] text-sm font-bold text-royal-900 mb-2">
                 Wedding Date
@@ -337,7 +348,7 @@ style="font-family: 'Great Vibes', cursive;">
 
                     <!-- Bride -->
                     <div class="text-center couple-card opacity-0 transform translate-x-20">
-                        <div class="relative w-64 h-64 mx-auto mb-6">
+                        <div class="relative w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto mb-6">
                             <div class="absolute inset-0 border-4 border-gold-500 rounded-full transform -rotate-45">
                             </div>
                             <div class="absolute inset-0 border-4 border-royal-900 rounded-full transform rotate-12">
@@ -367,7 +378,7 @@ style="font-family: 'Great Vibes', cursive;">
                 </div>
 
                 <!-- Vertical Line -->
-                <div class="relative max-w-4xl mx-auto">
+                <div class="relative w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto mb-6">
                     <!-- The actual line drawn by GSAP -->
                     <div
                         class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-gold-500 to-transparent transform md:-translate-x-1/2 timeline-line origin-top">
@@ -376,7 +387,7 @@ style="font-family: 'Great Vibes', cursive;">
                     <!-- Event 1: Engagement -->
 
                     <!-- Event 2: Mehendi -->
-                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item">
+                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item max-w-4xl mx-auto px-4 sm:px-0">
                         <div class="w-full md:w-[45%] order-3 md:order-1 pl-12 md:pl-0 md:pr-12">
                             <div
                                 class="bg-royal-800 p-6 rounded-lg border border-gold-600/30 hover:border-gold-500 transition-colors duration-300 shadow-lg group text-right md:text-left">
@@ -398,7 +409,7 @@ style="font-family: 'Great Vibes', cursive;">
                     </div>
 
                     <!-- Event 3: Nikkah -->
-                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item">
+                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item max-w-4xl mx-auto px-4 sm:px-0">
                         <div
                             class="w-full md:w-[45%] mb-8 md:mb-0 text-left md:text-right pr-0 md:pr-12 pl-12 md:pl-0 order-1">
                             <h3 class="font-serif text-4xl text-gold-400 mb-2">Nikkah</h3>
@@ -420,7 +431,7 @@ style="font-family: 'Great Vibes', cursive;">
                     </div>
 
                     <!-- Event 4: Wedding -->
-                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item">
+                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item max-w-4xl mx-auto px-4 sm:px-0">
                         <div class="w-full md:w-[45%] order-3 md:order-1 pl-12 md:pl-0 md:pr-12">
                             <div
                                 class="bg-royal-800 p-6 rounded-lg border border-gold-600/30 hover:border-gold-500 transition-colors duration-300 shadow-lg group">
@@ -480,7 +491,7 @@ style="font-family: 'Great Vibes', cursive;">
                             <!-- Interactive Map Placeholder -->
                             <div class="w-full h-64 bg-gray-200 mb-4 relative overflow-hidden group rounded">
 
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.476794561942!2d80.4370007!3d16.2985644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4a754140542df5%3A0xb4bd24963629247c!2sNGO%20Kalyana%20Mandapam!5e0!3m2!1sen!2sin!4v1779864282778!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.476794561942!2d80.4370007!3d16.2985644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4a754140542df5%3A0xb4bd24963629247c!2sNGO%20Kalyana%20Mandapam!5e0!3m2!1sen!2sin!4v1779864282778!5m2!1sen!2sin" class ="w-full h-full" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 <div
                                     class="absolute inset-0 bg-gold-500/10 pointer-events-none group-hover:bg-transparent transition-colors">
                                 </div>
@@ -765,11 +776,14 @@ window.addEventListener("load", () => {
     const ctx = canvas.getContext("2d");
 
     // Canvas size
+function resizeCanvas() {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
+    initCard();
+}
 
-    // Draw scratch layer
-    function initCard() {
+resizeCanvas(); // run once on load
+window.addEventListener("resize", resizeCanvas);
 
         // Golden layer
         const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
