@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation | Zubair & Hameeda</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Lato:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        royal: {
+                            900: '#2a0202', // Darker Maroon for depth
+                            800: '#4a0404',
+                            700: '#630808',
+                            100: '#f9ebeb'
+                        },
+                        gold: {
+                            400: '#d4af37',
+                            500: '#c5a028',
+                            600: '#b08d20',
+                            glow: '#fadd80'
+                        },
+                        cream: '#fffdd0',
+                    },
+                    fontFamily: {
+                        script: ['Great Vibes', 'cursive'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Lato', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2a0202;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+
+        /* Ambient Floating Particles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 50;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 1;
+            will-change: transform;
+        }
+
+        /* Utilities */
+        .text-shadow-gold {
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Mandala Spin Animation */
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 60s linear infinite;
+        }
+
+        /* === ULTRA REALISTIC CURTAIN STYLES === */
+        .curtain-container {
+            perspective: 1000px;
+            /* Adds depth for the 3D skew effect */
+        }
+
+        .curtain-panel {
+            /* Realistic Velvet Texture using gradients for folds */
+            background-color: #4a0404;
+            background-image:
+                /* Deep shadows for folds */
+                repeating-linear-gradient(90deg,
+                    rgba(0, 0, 0, 0.5) 0%,
+                    rgba(0, 0, 0, 0.1) 15%,
+                    rgba(255, 255, 255, 0.05) 25%,
+                    /* Highlight */
+                    rgba(0, 0, 0, 0.1) 35%,
+                    rgba(0, 0, 0, 0.5) 50%),
+                /* Subtle pattern texture */
+                url('https://www.transparenttextures.com/patterns/arabesque.png');
+            background-size: 100% 100%, 200px 200px;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.9);
+            transform-origin: top center;
+            will-change: transform;
+        }
+
+        .curtain-hem {
+            /* Ornate Gold Border */
+            background: linear-gradient(to bottom, #b08d20, #fadd80, #b08d20);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Central Glow Effect behind curtains */
+        .stage-glow {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(74, 4, 4, 0) 70%);
+            mix-blend-mode: screen;
+            opacity: 0;
+        }
+#scratchCard{
+    touch-action:none;
+}
+    </style>
+</head>
+
+<body class="bg-royal-900 text-cream overflow-x-hidden selection:bg-gold-500 selection:text-royal-900">
+
+    <!-- Audio Player -->
+    <audio id="weddingMusic" loop>
+        <source
+            src="Kudmayi-(Film-Version)(PaglaSongs).mp3"
+            type="audio/ogg">
+    </audio>
+
+    <div id="musicControl" class="fixed bottom-6 right-6 z-50 cursor-pointer hidden">
+        <div
+            class="w-12 h-12 rounded-full bg-gold-500 flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 animate-pulse">
+            <i id="musicIcon" class="fas fa-music text-royal-900"></i>
+        </div>
+    </div>
+
+    <!-- ==================== CINEMATIC CURTAIN ENTRY ==================== -->
+    <div id="curtainLayer" class="fixed inset-0 z-[100] flex curtain-container overflow-hidden pointer-events-auto">
+
+        <!-- Central Stage Light (Behind Curtains, In Front of Main) -->
+        <div id="centerGlow" class="absolute inset-0 stage-glow z-[90]"></div>
+
+        <!-- Left Curtain -->
+        <div class="curtain-panel curtain-left w-1/2 h-full relative z-[100] flex items-center justify-end">
+            <!-- Gold Border/Hem -->
+            <div class="absolute right-0 top-0 bottom-0 w-3 md:w-5 curtain-hem border-l-2 border-r-2 border-yellow-700">
+            </div>
+            <!-- Decorative Tassel Look (CSS) -->
+            <div class="text-gold-500 opacity-30 text-9xl absolute -right-32 top-1/4 rotate-45 pointer-events-none">✨
+            </div>
+        </div>
+
+        <!-- Right Curtain -->
+        <div class="curtain-panel curtain-right w-1/2 h-full relative z-[100] flex items-center justify-start">
+            <!-- Gold Border/Hem -->
+            <div class="absolute left-0 top-0 bottom-0 w-3 md:w-5 curtain-hem border-l-2 border-r-2 border-yellow-700">
+            </div>
+            <!-- Decorative Tassel Look (CSS) -->
+            <div class="text-gold-500 opacity-30 text-9xl absolute -left-32 top-1/4 rotate-45 pointer-events-none">✨
+            </div>
+        </div>
+
+        <!-- Entry Content (Floating on top) -->
+        <div id="entryContent"
+            class="absolute inset-0 flex flex-col items-center justify-center z-[101] text-center px-4">
+            <div
+                class="relative p-10 border-4 border-double border-gold-500/50 bg-black/30 backdrop-blur-sm rounded-lg shadow-2xl transform transition-transform hover:scale-105 duration-700">
+                <h2 class="font-script text-gold-400 text-4xl md:text-6xl mb-4 entry-text">You Are Invited</h2>
+                <h1
+class="font-script text-white text-6xl md:text-9xl mb-8 entry-text tracking-wide drop-shadow-[0_0_15px_rgba(212,175,55,0.5)] leading-tight">
+    Zubair
+    <span class="text-gold-500 text-5xl md:text-7xl mx-2">&</span>
+    Hameeda
+</h1>
+
+                <button id="openBtn"
+                    class="group relative px-10 py-5 bg-royal-900 border border-gold-500 text-gold-500 font-serif text-xl tracking-widest uppercase overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.6)]">
+                    <span class="relative z-10 group-hover:text-cream transition-colors duration-300">Open
+                        Invitation</span>
+                    <div
+                        class="absolute inset-0 bg-gold-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out -z-0">
+                    </div>
+                </button>
+            </div>
+
+            <p class="mt-6 text-sm text-gold-300 entry-text italic opacity-80 animate-pulse">Tap to begin the
+                celebration</p>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN SITE CONTENT ==================== -->
+    <main id="mainContent" class="opacity-0 filter blur-xl">
+
+        <!-- Hero Section -->
+        <section class="min-h-screen relative flex flex-col items-center justify-center overflow-hidden">
+            <!-- Background Parallax -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"
+                    class="w-full h-full object-cover opacity-30 scale-110 parallax-bg" alt="Wedding Background">
+                <div class="absolute inset-0 bg-gradient-to-b from-royal-900 via-transparent to-royal-900"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="gsap-hero-reveal transform translate-y-10 opacity-0">
+
+    <div class="mb-8">
+        <h2 class="text-gold-400 text-3xl md:text-7xl font-script tracking-wide">
+         بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+</h2>
+
+        <p
+class="text-gold-200 text-2xl md:text-3xl mt-3 tracking-[0.25em] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"
+style="font-family: 'Great Vibes', cursive;">
+    Bismillahir Rahmanir Raheem
+</p>
+    </div>
+
+</div>
+
+                <p
+                    class="gsap-hero-reveal font-serif text-gold-500 tracking-[0.3em] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] uppercase mb-10 transform translate-y-10 opacity-0">
+                    In the name of Allah, The most gracious, The most merciful</p>
+                <p>                                                                       </p>
+
+                <h1
+                    class="gsap-hero-reveal font-script text-7xl md:text-9xl text-cream mb-6 transform translate-y-10 opacity-0 text-shadow-gold">
+                    Zubair <span class="text-gold-500">&</span> Hameeda
+                </h1>
+
+                <p
+                    class="gsap-hero-reveal font-serif text-xl md:text-2xl text-gold-200 mb-10 transform translate-y-10 opacity-0">
+                    Invite you to join us in the celebration of our love
+                </p>
+
+                
+<!-- Scratch Card Reveal -->
+<div class="gsap-hero-reveal transform translate-y-10 opacity-0 flex justify-center mt-8">
+
+    <div class="relative w-[340px] h-[130px] rounded-2xl overflow-hidden">
+
+        <!-- Hidden Content -->
+        <div
+            class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-r from-yellow-200 via-gold-500 to-yellow-300 rounded-2xl z-0">
+
+            <p class="uppercase tracking-[0.3em] text-sm font-bold text-royal-900 mb-2">
+                Wedding Date
+            </p>
+
+            <h2 class="font-serif text-4xl text-royal-900 font-bold">
+                August 8, 2026
+            </h2>
+
+        </div>
+
+        <!-- Scratch Layer -->
+        <canvas id="scratchCard"
+            class="absolute top-0 left-0 w-full h-full z-10 rounded-2xl">
+        </canvas>
+
+    </div>
+
+</div>
+                    
+                </div>
+
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                    <i class="fas fa-chevron-down text-gold-500 text-2xl"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Couple Story Section -->
+        <section class="py-24 bg-cream text-royal-900 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-64 h-64 opacity-10">
+                <img src="https://www.svgrepo.com/show/530219/mandala.svg" class="w-full h-full animate-spin-slow">
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-4xl md:text-5xl text-royal-900 mb-4 section-title opacity-0">Our Story
+                    </h2>
+                    <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
+                    <!-- Groom -->
+                    <div class="text-center couple-card opacity-0 transform -translate-x-20">
+                        <div class="relative w-64 h-64 mx-auto mb-6">
+                            <div class="absolute inset-0 border-4 border-gold-500 rounded-full transform rotate-45">
+                            </div>
+                            <div class="absolute inset-0 border-4 border-royal-900 rounded-full transform -rotate-12">
+                            </div>
+                            <img src="D:\MD YASEEN\My Projects\wedding invitation\Tom.jpg"
+                                class="w-full h-full object-cover rounded-full shadow-xl grayscale hover:grayscale-0 transition-all duration-500"
+                                alt="Groom">
+                        </div>
+                        <h3 class="font-script text-4xl text-royal-900 mb-2">Zubair</h3>
+                    </div>
+
+                    <!-- Heart Icon -->
+                    <div class="text-gold-400 text-4xl md:text-6xl animate-pulse">
+                        <i class="fas fa-heart"></i>
+                    </div>
+
+                    <!-- Bride -->
+                    <div class="text-center couple-card opacity-0 transform translate-x-20">
+                        <div class="relative w-64 h-64 mx-auto mb-6">
+                            <div class="absolute inset-0 border-4 border-gold-500 rounded-full transform -rotate-45">
+                            </div>
+                            <div class="absolute inset-0 border-4 border-royal-900 rounded-full transform rotate-12">
+                            </div>
+                            <img src="D:\MD YASEEN\My Projects\wedding invitation\toodles.jpg"
+                                class="w-full h-full object-cover rounded-full shadow-xl grayscale hover:grayscale-0 transition-all duration-500"
+                                alt="Bride">
+                        </div>
+                        <h3 class="font-script text-4xl text-royal-900 mb-2">Hameeda</h3>
+                    </div>
+                </div>
+
+                <!-- Typewriter Text -->
+                <div class="mt-16 text-center max-w-2xl mx-auto">
+                    <p id="storyTypewriter" class="font-serif text-xl md:text-2xl text-royal-800 leading-relaxed"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wedding Timeline -->
+        <section class="py-24 bg-royal-900 relative">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-20">
+                    <h2 class="font-serif text-4xl md:text-5xl text-gold-400 mb-2 section-title opacity-0">Wedding
+                        Events</h2>
+                    <p class="font-sans text-cream opacity-70">A celebration of love and tradition</p>
+                </div>
+
+                <!-- Vertical Line -->
+                <div class="relative max-w-4xl mx-auto">
+                    <!-- The actual line drawn by GSAP -->
+                    <div
+                        class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-gold-500 to-transparent transform md:-translate-x-1/2 timeline-line origin-top">
+                    </div>
+
+                    <!-- Event 1: Engagement -->
+
+                    <!-- Event 2: Mehendi -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item">
+                        <div class="w-full md:w-[45%] order-3 md:order-1 pl-12 md:pl-0 md:pr-12">
+                            <div
+                                class="bg-royal-800 p-6 rounded-lg border border-gold-600/30 hover:border-gold-500 transition-colors duration-300 shadow-lg group text-right md:text-left">
+                                <i
+                                    class="fas fa-hand-sparkles text-4xl text-gold-500 mb-4 group-hover:scale-110 transition-transform block"></i>
+                                <p class="text-sm text-cream opacity-80 italic">"Color of love on hands."</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-royal-900 border-2 border-gold-500 rounded-full z-10 flex items-center justify-center order-2">
+                            <div class="w-3 h-3 bg-gold-500 rounded-full"></div>
+                        </div>
+                        <div class="w-full md:w-[45%] mb-8 md:mb-0 text-left pl-12 order-1 md:order-3">
+                            <h3 class="font-serif text-4xl text-gold-400 mb-2">Mehendi Ceremony</h3>
+                            <p class="font-sans text-gold-200 text-lg mb-1">AUGUST 7, 2026 | 11:00 AM</p>
+                            <p class="text-cream opacity-80 text-sm">HOME</p>
+                            <p class="text-xs text-gold-500 mt-2 uppercase tracking-widest">TURMERIC & BLESSINGS</p>
+                        </div>
+                    </div>
+
+                    <!-- Event 3: Nikkah -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item">
+                        <div
+                            class="w-full md:w-[45%] mb-8 md:mb-0 text-left md:text-right pr-0 md:pr-12 pl-12 md:pl-0 order-1">
+                            <h3 class="font-serif text-4xl text-gold-400 mb-2">Nikkah</h3>
+                            <p class="font-sans text-gold-200 text-lg mb-1">AUGUST 8, 2026 | 8:00 PM</p>
+                            <p class="text-cream opacity-80 text-sm">N.G.O's FUNCTION HALL</p>
+                            <p class="text-xs text-gold-500 mt-2 uppercase tracking-widest">SACRED WEDDING CEREMONY</p>
+                        </div>
+                        <div
+                            class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-royal-900 border-2 border-gold-500 rounded-full z-10 flex items-center justify-center order-2">
+                            <div class="w-3 h-3 bg-gold-500 rounded-full"></div>
+                        </div>
+                        <div class="w-full md:w-[45%] pl-12 order-3">
+                            <div
+                                class="bg-royal-800 p-6 rounded-lg border border-gold-600/30 hover:border-gold-500 transition-colors duration-300 shadow-lg group">
+                                <div class="fas text-4xl text-gold-500 mb-4 group-hover:scale-110 transition-transform block">🕌</div>
+                                <p class="text-sm text-cream opacity-80 italic">Two souls united in faith and love</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 4: Wedding -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between mb-16 timeline-item">
+                        <div class="w-full md:w-[45%] order-3 md:order-1 pl-12 md:pl-0 md:pr-12">
+                            <div
+                                class="bg-royal-800 p-6 rounded-lg border border-gold-600/30 hover:border-gold-500 transition-colors duration-300 shadow-lg group">
+                                <i
+                                    class="fas fa-dove text-4xl text-gold-500 mb-4 group-hover:scale-110 transition-transform block"></i>
+                                <p class="text-sm text-cream opacity-80 italic">"The Royal Union."</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gold-500 border-4 border-royal-900 rounded-full z-10 flex items-center justify-center order-2 shadow-[0_0_15px_rgba(212,175,55,0.8)]">
+                            <i class="fas fa-heart text-royal-900 text-sm"></i>
+                        </div>
+                        <div class="w-full md:w-[45%] mb-8 md:mb-0 text-left pl-12 order-1 md:order-3">
+                            <h3 class="font-serif text-4xl text-gold-400 mb-2">WALIMA</h3>
+                            <p class="font-sans text-gold-300 text-lg mb-1">AUGUST     9, 2026 | 7:00 PM</p>
+                            <p class="text-cream opacity-80 text-sm">Nandyala</p>
+                            <p class="text-xs text-gold-500 mt-2 uppercase tracking-widest">Celebrating love, laughter, and forever together</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Family & Venue Section (Grid) -->
+        <section class="py-24 bg-cream text-royal-900">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+                    <!-- Family -->
+                    <div class="venue-card opacity-0 transform translate-y-10">
+                        <div class="text-center border-4 border-double border-gold-500 p-10 h-full relative">
+                            <div class="absolute top-0 left-0 text-gold-500 text-4xl -mt-6 -ml-4"><i
+                                    class="fas fa-crown"></i></div>
+                            <h2 class="font-serif text-3xl mb-8">Blessings From</h2>
+
+                            <div class="mb-8">
+                                <h3 class="font-bold uppercase tracking-widest text-sm mb-2 text-gold-600">Groom's
+                                    Parents</h3>
+                                <p class="font-serif text-xl">************************************</p>
+                            </div>
+
+                            <div class="mb-8">
+                                <h3 class="font-bold uppercase tracking-widest text-sm mb-2 text-gold-600">Bride's
+                                    Parents</h3>
+                                <p class="font-serif text-xl">Mr & Mrs.Sk.Abdul Khuddus(Late) & Nanhe Saheb</p>
+                            </div>
+
+                            <p class="font-script text-2xl text-gold-600 mt-8 tracking-[0.2em]">And Grandparents</p>
+                        </div>
+                    </div>
+
+                    <!-- Venue Map -->
+                    <div class="venue-card opacity-0 transform translate-y-10 delay-200">
+                        <div class="h-full bg-white shadow-xl p-4 border border-gold-200 rounded-lg">
+                            <h2 class="font-serif text-2xl text-center mb-4 text-royal-900">N.G.O's Function Hall</h2>
+                            <!-- Interactive Map Placeholder -->
+                            <div class="w-full h-64 bg-gray-200 mb-4 relative overflow-hidden group rounded">
+
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3829.476794561942!2d80.4370007!3d16.2985644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4a754140542df5%3A0xb4bd24963629247c!2sNGO%20Kalyana%20Mandapam!5e0!3m2!1sen!2sin!4v1779864282778!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <div
+                                    class="absolute inset-0 bg-gold-500/10 pointer-events-none group-hover:bg-transparent transition-colors">
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="font-serif text-lg mb-4">Opp Guntur Medical College, College Road, Guntur</p>
+                                <a href="https://maps.app.goo.gl/CqtzcsfWiXaBjQRN8" target="_blank"
+                                    class="inline-block bg-royal-900 text-gold-500 px-6 py-2 rounded-full hover:bg-gold-500 hover:text-royal-900 transition-colors uppercase text-sm tracking-wider font-bold">
+                                    <i class="fas fa-location-arrow mr-2"></i> Get Directions
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section removed  -->
+
+        <footer class="bg-black text-center py-10 border-t border-royal-800">
+            <h2 class="font-script text-4xl text-gold-500 mb-4">Zubair & Hameeda</h2>
+            <p class="text-gray-500 text-sm uppercase tracking-widest">#MDYASEEN</p>
+            <p class="text-gray-700 text-xs mt-8">Designed with ❤️ for the special day</p>
+        </footer>
+    </main>
+
+    <script>
+        // ==================== GSAP ANIMATIONS ====================
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+        // --- PARTICLE SYSTEMS ---
+
+        function createParticles() {
+            const container = document.body;
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                const size = Math.random() * 4 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = '#d4af37';
+                particle.style.borderRadius = '50%';
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+
+                container.appendChild(particle);
+
+                gsap.to(particle, {
+                    y: -100 - Math.random() * 200,
+                    x: Math.random() * 50 - 25,
+                    opacity: Math.random() * 0.5 + 0.2,
+                    duration: Math.random() * 5 + 5,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                    delay: Math.random() * 5
+                });
+            }
+        }
+
+        function createPetals() {
+            const container = document.body;
+            const petalCount = 20;
+            const petalSVG = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzAgMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE1LDBDNSwxMCwwLDIwLDE1LDMwQzMwLDIwLDI1LDEwLDE1LDB6IiBmaWxsPSIjZmZjMGNiIiBvcGFjaXR5PSIwLjYiLz48L3N2Zz4=";
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.backgroundImage = `url('${petalSVG}')`;
+
+                const size = Math.random() * 20 + 10;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                petal.style.left = `${Math.random() * 100}vw`;
+                petal.style.top = `-50px`;
+
+                container.appendChild(petal);
+
+                // Add falling animation immediately when called
+                gsap.to(petal, {
+                    y: '110vh',
+                    x: `+=${Math.random() * 100 - 50}`,
+                    rotation: Math.random() * 360 + 360,
+                    duration: Math.random() * 5 + 8, // Vary speed
+                    repeat: -1,
+                    ease: "none",
+                    delay: Math.random() * 5
+                });
+            }
+        }
+
+        // --- ENTRY SEQUENCE ---
+
+        const openBtn = document.getElementById('openBtn');
+        const curtainLayer = document.getElementById('curtainLayer');
+        const mainContent = document.getElementById('mainContent');
+        const audio = document.getElementById('weddingMusic');
+        const musicControl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = false;
+
+        // Intro Animation for Button
+        gsap.to(".entry-text", {
+            y: 0,
+            opacity: 1,
+            stagger: 0.2,
+            duration: 1,
+            ease: "power3.out",
+            delay: 0.5
+        });
+
+        // Open Interaction
+        openBtn.addEventListener('click', () => {
+            // 1. Play Music
+            audio.volume = 0.5;
+            audio.play().then(() => {
+                isPlaying = true;
+                musicControl.classList.remove('hidden');
+            }).catch(e => console.log("Audio play failed", e));
+
+            // GSAP Timeline for Realistic Opening
+            const openTl = gsap.timeline({
+                onComplete: () => {
+                    curtainLayer.style.display = 'none';
+                }
+            });
+
+            // A. Fade out button container
+            openTl.to("#entryContent", { opacity: 0, duration: 0.5, ease: "power2.out" });
+
+            // B. Ignite the glow
+            openTl.to("#centerGlow", { opacity: 0.8, duration: 1, scale: 1.5 }, "<");
+
+            // C. Realistic Curtain Pull (Skew + Scale + Move)
+            // Left Curtain
+            openTl.to(".curtain-left", {
+                xPercent: -100,
+                skewX: 10, // Simulate drag force
+                scaleX: 0.9, // Fabric compression
+                duration: 2.5,
+                ease: "power4.inOut"
+            }, "open");
+
+            // Right Curtain
+            openTl.to(".curtain-right", {
+                xPercent: 100,
+                skewX: -10, // Simulate drag force
+                scaleX: 0.9,
+                duration: 2.5,
+                ease: "power4.inOut"
+            }, "open");
+
+            // D. Reveal Main Content (Blur Focus)
+            openTl.to("#mainContent", {
+                opacity: 1,
+                filter: "blur(0px)",
+                duration: 2.5,
+                ease: "power2.out"
+            }, "-=2.0");
+
+            // E. Reset Curtain Props (optional, cleanup)
+            openTl.set(".curtain-panel", { skewX: 0, scaleX: 1 });
+
+            // Start ambient effects
+            createParticles();
+            createPetals();
+            runHeroAnimations();
+        });
+
+        // Music Toggle
+        musicControl.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.classList.remove('fa-music');
+                musicIcon.classList.add('fa-volume-mute');
+                musicControl.classList.remove('animate-pulse');
+            } else {
+                audio.play();
+                musicIcon.classList.add('fa-music');
+                musicIcon.classList.remove('fa-volume-mute');
+                musicControl.classList.add('animate-pulse');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // --- SCROLL ANIMATIONS ---
+
+        function runHeroAnimations() {
+            // Hero Elements Reveal
+            gsap.to(".gsap-hero-reveal", {
+                y: 0,
+                opacity: 1,
+                stagger: 0.2,
+                duration: 1.5,
+                ease: "power3.out",
+                delay: 0.5
+            });
+
+            // Parallax Background
+            gsap.to(".parallax-bg", {
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                },
+                y: 200,
+                scale: 1
+            });
+        }
+
+        // Rest of scroll animations
+        gsap.to(".section-title", {
+            scrollTrigger: { trigger: ".section-title", start: "top 80%" },
+            opacity: 1, y: 0, duration: 1
+        });
+
+        gsap.to(".couple-card", {
+            scrollTrigger: { trigger: ".couple-card", start: "top 75%" },
+            x: 0, opacity: 1, stagger: 0.3, duration: 1, ease: "back.out(1.7)"
+        });
+
+        ScrollTrigger.create({
+            trigger: "#storyTypewriter",
+            start: "top 80%",
+            onEnter: () => {
+                gsap.to("#storyTypewriter", {
+                    text: {
+                        value: "Two hearts, two families, and one beautiful destiny brought together through love, trust, and blessings. What began as an arranged meeting soon blossomed into a bond filled with understanding, respect, and companionship. With the blessings of our families, we are beginning this beautiful journey forever together, and we invite you to celebrate this special union with us."
+                    },
+                    duration: 6,
+                    ease: "none"
+                });
+            }
+        });
+
+        gsap.from(".timeline-line", {
+            scrollTrigger: {
+                trigger: ".timeline-item",
+                start: "top 70%",
+                end: "bottom 20%",
+                scrub: 1
+            },
+            scaleY: 0,
+            transformOrigin: "top center",
+            ease: "none"
+        });
+
+        gsap.utils.toArray(".timeline-item").forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: i * 0.1
+            });
+        });
+
+        gsap.utils.toArray(".venue-card").forEach((card) => {
+            gsap.to(card, {
+                scrollTrigger: { trigger: card, start: "top 85%" },
+                y: 0, opacity: 1, duration: 1, ease: "power2.out"
+            });
+        });
+
+        
+
+
+        // ================= SCRATCH CARD EFFECT =================
+
+window.addEventListener("load", () => {
+
+    const canvas = document.getElementById("scratchCard");
+    const ctx = canvas.getContext("2d");
+
+    // Canvas size
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    // Draw scratch layer
+    function initCard() {
+
+        // Golden layer
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+
+        gradient.addColorStop(0, "#d4af37");
+        gradient.addColorStop(1, "#8b6508");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Text
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 24px serif";
+        ctx.textAlign = "center";
+
+        ctx.fillText(
+            "Scratch To Reveal ✨",
+            canvas.width / 2,
+            canvas.height / 2
+        );
+
+        // Scratch mode
+        ctx.globalCompositeOperation = "destination-out";
+    }
+
+    initCard();
+
+    let isDrawing = false;
+    let exploded = false;
+
+    function getPosition(e) {
+
+        const rect = canvas.getBoundingClientRect();
+
+        if (e.touches) {
+            return {
+                x: e.touches[0].clientX - rect.left,
+                y: e.touches[0].clientY - rect.top
+            };
+        }
+
+        return {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        };
+    }
+
+    function startScratch(e) {
+        isDrawing = true;
+        scratch(e);
+    }
+
+    function stopScratch() {
+        isDrawing = false;
+    }
+
+    function scratch(e) {
+
+        if (!isDrawing || exploded) return;
+
+        e.preventDefault();
+
+        const pos = getPosition(e);
+
+        // Main scratch
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, 35, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Blast particles
+        for (let i = 0; i < 10; i++) {
+
+            const angle = Math.random() * Math.PI * 2;
+            const radius = Math.random() * 50;
+
+            const x = pos.x + Math.cos(angle) * radius;
+            const y = pos.y + Math.sin(angle) * radius;
+
+            ctx.beginPath();
+            ctx.arc(x, y, Math.random() * 8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Check scratched area
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        let transparentPixels = 0;
+
+        for (let i = 3; i < imageData.data.length; i += 4) {
+
+            if (imageData.data[i] === 0) {
+                transparentPixels++;
+            }
+        }
+
+        const scratched = transparentPixels / (canvas.width * canvas.height);
+
+        // Blast Reveal
+        if (scratched > 0.18 && !exploded) {
+
+            exploded = true;
+
+            // Explosion effect
+            gsap.to(canvas, {
+                scale: 3,
+                rotation: 25,
+                opacity: 0,
+                duration: 1,
+                ease: "power4.out",
+                onComplete: () => {
+                    canvas.style.display = "none";
+                }
+            });
+
+            // Flash glow
+            gsap.fromTo(
+                canvas.parentElement,
+                {
+                    boxShadow: "0 0 0px gold"
+                },
+                {
+                    boxShadow: "0 0 150px rgba(255,215,0,1)",
+                    duration: 0.5,
+                    repeat: 1,
+                    yoyo: true
+                }
+            );
+        }
+    }
+
+    // Desktop
+    canvas.addEventListener("mousedown", startScratch);
+    canvas.addEventListener("mousemove", scratch);
+    window.addEventListener("mouseup", stopScratch);
+
+    // Mobile
+    canvas.addEventListener("touchstart", startScratch);
+    canvas.addEventListener("touchmove", scratch);
+    window.addEventListener("touchend", stopScratch);
+
+});
+    </script>
+</body>
+
+</html>
