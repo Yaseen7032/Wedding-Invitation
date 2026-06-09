@@ -122,41 +122,83 @@ video {
   </style>
 
 <main class="w-full max-w-[430px] mx-auto overflow-x-hidden relative">
-    
-    <div id="loader" class="absolute inset-0 z-[100] min-h-screen bg-[#001933] flex flex-col items-center justify-center transition-all duration-1000 rounded-b-3xl" data-kid="2">
-      <div class="absolute inset-0 w-full h-full overflow-hidden">
-  <video class="w-full h-full object-cover scale-110 sm:scale-100"
+
+<!-- ================= LOADER ================= -->
+<div id="loader"
+     class="fixed inset-0 z-[100] bg-[#001933] flex flex-col items-center justify-center transition-all duration-1000">
+
+  <!-- FULLSCREEN VIDEO -->
+  <video class="absolute inset-0 w-full h-full object-cover scale-110 opacity-50"
+         src="https://videos.pexels.com/video-files/35150246/14890795_360_640_30fps.mp4"
+         poster="https://images.pexels.com/videos/35150246/pexels-photo-35150246.jpeg"
          autoplay muted loop playsinline>
-      <video class="absolute inset-0 w-full h-full object-cover opacity-50 scale-110 md:scale-100" src="https://videos.pexels.com/video-files/35150246/14890795_360_640_30fps.mp4" poster="https://images.pexels.com/videos/35150246/pexels-photo-35150246.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630" autoplay muted loop playsinline data-kid="3"></video>
-      <div class="relative z-10 text-center px-8" data-kid="4">
-        <img src="https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/lorc/concentric-crescents.svg" class="w-20 h-20 mx-auto mb-8 drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]" style="filter: invert(72%) sepia(21%) saturate(1022%) hue-rotate(1deg) brightness(101%) contrast(85%);" data-kid="5">
-        <h2 class="font-heading italic text-2xl gold-gradient-text mb-4 animate-pulse" data-kid="6">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h2>
-        <p class="text-[10px] tracking-[0.4em] uppercase text-white/50 mb-12" data-kid="7">In the Name of Allah, Most Gracious, Most Merciful</p>
-        
-        <button onclick="document.getElementById('loader').classList.add('hide-loader'); setTimeout(() => document.getElementById('loader').style.display='none', 1500);" class="relative px-12 py-4 rounded-full border border-[#D4AF37] text-[10px] uppercase tracking-[0.4em] gold-gradient-text overflow-hidden hover:bg-[#D4AF37]/10 transition-all cursor-pointer group" data-kid="8">
-          <span class="relative z-10 font-bold" data-kid="9">Enter Celebration</span>
-          <div class="absolute inset-0 shimmer-anim opacity-30 group-hover:opacity-50" data-kid="10"></div>
-        </button>
-      </div>
+  </video>
+
+  <!-- OVERLAY -->
+  <div class="absolute inset-0 bg-black/40"></div>
+
+  <!-- CONTENT -->
+  <div class="relative z-10 text-center px-6">
+
+    <img src="https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/lorc/concentric-crescents.svg"
+         class="w-16 h-16 mx-auto mb-6 opacity-80"
+         style="filter: invert(72%) sepia(21%) saturate(1022%) hue-rotate(1deg);">
+
+    <h2 class="font-heading italic text-xl gold-gradient-text mb-3">
+      بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+    </h2>
+
+    <p class="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-10">
+      In the Name of Allah
+    </p>
+
+    <button
+      onclick="document.getElementById('loader').style.opacity='0'; setTimeout(()=>loader.remove(),800)"
+      class="px-10 py-3 rounded-full border border-[#D4AF37] text-[10px] uppercase tracking-widest gold-gradient-text relative overflow-hidden">
+
+      <span class="relative z-10 font-bold">Enter</span>
+      <div class="absolute inset-0 shimmer-anim opacity-30"></div>
+
+    </button>
+
+  </div>
+</div>
+
+
+<!-- ================= HERO SECTION ================= -->
+<section class="relative min-h-[100svh] flex items-end px-4 pb-6 overflow-hidden">
+
+  <!-- BACKGROUND IMAGE -->
+  <img src="https://images.unsplash.com/photo-1609101466601-b60143ee4274?auto=format&w=800&q=80&fit=crop"
+       class="absolute inset-0 w-full h-full object-cover zoom-in-out opacity-60">
+
+  <!-- DARK OVERLAY -->
+  <div class="absolute inset-0 bg-gradient-to-t from-[#001933] via-transparent to-[#001933]/60"></div>
+
+  <!-- CARD -->
+  <div class="glass w-full max-w-[430px] mx-auto rounded-3xl p-6 text-center relative z-10">
+
+    <span class="text-[10px] uppercase tracking-[0.4em] text-white/60 mb-2 block">
+      Assalamu Alaikum
+    </span>
+
+    <h1 class="font-heading text-4xl sm:text-5xl gold-gradient-text leading-tight mb-4">
+      Zubair <br>& Hameeda
+    </h1>
+
+    <p class="text-xs opacity-60 italic mb-6">
+      Together with families, inviting you.
+    </p>
+
+    <div class="flex justify-center gap-2">
+      <span class="w-1.5 h-1.5 bg-[#D4AF37] rounded-full"></span>
+      <span class="w-1.5 h-1.5 bg-[#D4AF37]/50 rounded-full"></span>
+      <span class="w-1.5 h-1.5 bg-[#D4AF37]/30 rounded-full"></span>
     </div>
-    
-    
-    <section class="relative min-h-[100svh] flex flex-col justify-end px-5 pb-8 overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1609101466601-b60143ee4274?auto=format&w=800&q=80&fit=crop" class="absolute inset-0 w-full h-full object-cover zoom-in-out opacity-60" decoding="async" loading="lazy" data-kid="12">
-      <div class="absolute inset-0 bg-gradient-to-t from-[#001933] via-transparent to-[#001933]/40" data-kid="13"></div>
-      
-      <div class="glass w-full rounded-3xl p-5 sm:p-8 max-w-[430px] mx-auto w-full text-center relative z-10 fade-up" data-kid="14">
-        <div class="w-12 h-1 bg-white/10 rounded-full mx-auto mb-8" data-kid="15"></div>
-        <span class="text-[10px] uppercase tracking-[0.4em] text-white/60 mb-2 block" data-kid="16">Assalamu Alaikum</span>
-        <h1 class="font-heading text-5xl mb-6 gold-gradient-text tracking-tight leading-tight" data-kid="17">Zubair <br data-kid="18">&amp; Hameeda</h1>
-        <p class="font-body text-sm opacity-60 leading-relaxed italic mb-8" data-kid="19">Together with their families, they request the honor of your presence.</p>
-        <div class="flex justify-center gap-4" data-kid="20">
-          <div class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" data-kid="21"></div>
-          <div class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/40" data-kid="22"></div>
-          <div class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/20" data-kid="23"></div>
-        </div>
-      </div>
-    </section>
+
+  </div>
+
+</section>
 
     
     <section class="py-16 px-6 relative z-10 -mt-10" data-kid="24">
