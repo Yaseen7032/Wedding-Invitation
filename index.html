@@ -98,24 +98,25 @@
     }
 
 
-    html, body {
-  width: 100%;
+  html, body {
+  height: 100%;
   overflow-x: hidden;
-  -webkit-text-size-adjust: 100%;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+section {
+  width: 100%;
 }
 
-@media (max-width: 480px) {
-  .glass {
-    backdrop-filter: blur(10px);
+/* Android safe viewport fix */
+@supports (-webkit-touch-callout: none) {
+  .min-h-\[100svh\] {
+    min-height: -webkit-fill-available;
   }
+}
 
-  h1, h2, h3 {
-    line-height: 1.2;
-  }
+video {
+  object-fit: cover;
+  object-position: center;
 }
 
   </style>
@@ -123,7 +124,10 @@
 <main class="w-full max-w-[430px] mx-auto overflow-x-hidden relative">
     
     <div id="loader" class="absolute inset-0 z-[100] min-h-screen bg-[#001933] flex flex-col items-center justify-center transition-all duration-1000 rounded-b-3xl" data-kid="2">
-      <video class="absolute inset-0 w-full h-full object-cover opacity-40" src="https://videos.pexels.com/video-files/35150246/14890795_360_640_30fps.mp4" poster="https://images.pexels.com/videos/35150246/pexels-photo-35150246.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630" autoplay muted loop playsinline data-kid="3"></video>
+      <div class="absolute inset-0 w-full h-full overflow-hidden">
+  <video class="w-full h-full object-cover scale-110 sm:scale-100"
+         autoplay muted loop playsinline>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-50 scale-110 md:scale-100" src="https://videos.pexels.com/video-files/35150246/14890795_360_640_30fps.mp4" poster="https://images.pexels.com/videos/35150246/pexels-photo-35150246.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630" autoplay muted loop playsinline data-kid="3"></video>
       <div class="relative z-10 text-center px-8" data-kid="4">
         <img src="https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/lorc/concentric-crescents.svg" class="w-20 h-20 mx-auto mb-8 drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]" style="filter: invert(72%) sepia(21%) saturate(1022%) hue-rotate(1deg) brightness(101%) contrast(85%);" data-kid="5">
         <h2 class="font-heading italic text-2xl gold-gradient-text mb-4 animate-pulse" data-kid="6">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h2>
@@ -137,11 +141,11 @@
     </div>
     
     
-    <section class="min-h-screen relative flex flex-col justify-end p-8 overflow-hidden" data-kid="11">
+    <section class="relative min-h-[100svh] flex flex-col justify-end px-5 pb-8 overflow-hidden">
       <img src="https://images.unsplash.com/photo-1609101466601-b60143ee4274?auto=format&w=800&q=80&fit=crop" class="absolute inset-0 w-full h-full object-cover zoom-in-out opacity-60" decoding="async" loading="lazy" data-kid="12">
       <div class="absolute inset-0 bg-gradient-to-t from-[#001933] via-transparent to-[#001933]/40" data-kid="13"></div>
       
-      <div class="glass w-full rounded-3xl p-8 text-center relative z-10 fade-up" data-kid="14">
+      <div class="glass w-full rounded-3xl p-5 sm:p-8 max-w-[430px] mx-auto w-full text-center relative z-10 fade-up" data-kid="14">
         <div class="w-12 h-1 bg-white/10 rounded-full mx-auto mb-8" data-kid="15"></div>
         <span class="text-[10px] uppercase tracking-[0.4em] text-white/60 mb-2 block" data-kid="16">Assalamu Alaikum</span>
         <h1 class="font-heading text-5xl mb-6 gold-gradient-text tracking-tight leading-tight" data-kid="17">Zubair <br data-kid="18">&amp; Hameeda</h1>
@@ -436,7 +440,7 @@ setInterval(updateCountdown, 1000);
     <section class="py-20 px-8" data-kid="88">
       <h2 class="font-script text-5xl md:text-5xl gold-gradient-text text-center mb-4">The Celebration</h2>
       
-      <div class="event-card glass rounded-[2rem] p-8 border-l-4 border-[#D4AF37]">
+      <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
 
     <div class="flex justify-between items-start mb-8">
 
@@ -491,7 +495,7 @@ setInterval(updateCountdown, 1000);
 </div>
 
       
-      <div class="event-card glass rounded-[2rem] p-8 border-l-4 border-[#D4AF37]">
+      <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
 
     <div class="flex justify-between items-start mb-8">
 
@@ -546,7 +550,7 @@ setInterval(updateCountdown, 1000);
 </div>
 
         
-        <div class="event-card glass rounded-[2rem] p-8 border-l-4 border-[#D4AF37]">
+        <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
 
     <div class="flex justify-between items-start mb-8">
 
@@ -675,7 +679,7 @@ setInterval(updateCountdown, 1000);
             </div>
           </div>
         </div>
-        <div class="p-8 text-center" data-kid="137">
+        <div class="p-5 sm:p-8 max-w-[430px] mx-auto w-full text-center" data-kid="137">
           <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
 
 <h3 class="gold-gradient-text text-3xl mb-4 "
@@ -845,8 +849,11 @@ brideBtn.addEventListener("click", () => {
     
 
     
-    <section class="min-h-screen bg-black relative flex flex-col items-center justify-center p-8 overflow-hidden" data-kid="186">
-      <video class="absolute inset-0 w-full h-full object-cover opacity-50" src="https://videos.pexels.com/video-files/10203124/10203124-hd_720_1280_30fps.mp4" poster="https://images.pexels.com/videos/10203124/bright-lights-burst-crackers-deepawali-10203124.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630" autoplay muted loop playsinline data-kid="187"></video>
+    <section class="relative min-h-[100svh] flex flex-col justify-end px-5 pb-8 overflow-hidden">
+      <div class="absolute inset-0 w-full h-full overflow-hidden">
+  <video class="w-full h-full object-cover scale-110 sm:scale-100"
+         autoplay muted loop playsinline>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-50 scale-110 md:scale-100" src="https://videos.pexels.com/video-files/10203124/10203124-hd_720_1280_30fps.mp4" poster="https://images.pexels.com/videos/10203124/bright-lights-burst-crackers-deepawali-10203124.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630" autoplay muted loop playsinline data-kid="187"></video>
       <div class="relative z-10 text-center" data-kid="188">
         <h2 class="font-heading text-6xl gold-gradient-text mb-8 italic fade-up" data-kid="189">Thank You</h2>
         <p class="text-xs opacity-60 tracking-[0.3em] uppercase max-w-[200px] mx-auto leading-relaxed" data-kid="190">For being a part of our beautiful journey.</p>
