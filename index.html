@@ -8,7 +8,9 @@
   
 <meta name="viewport" content="width=device-width, initial-scale=1.0">  
 
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/@tailwindcss/browser@4">
+    
+  </script>
   
   <style>html, body { margin: 0; padding: 0; } #root { display: contents; }</style>
 </head><body>
@@ -152,14 +154,195 @@ video {
       In the Name of Allah
     </p>
 
-    <button
-      onclick="document.getElementById('loader').style.opacity='0'; setTimeout(()=>loader.remove(),800)"
-      class="px-10 py-3 rounded-full border border-[#D4AF37] text-[10px] uppercase tracking-widest gold-gradient-text relative overflow-hidden">
+    <button id="enterBtn"
+onclick="document.getElementById('loader').classList.add('hide-loader'); setTimeout(() => document.getElementById('loader').style.display='none', 1500);"
+class="cracker-btn relative px-12 py-4 rounded-full overflow-hidden cursor-pointer">
 
-      <span class="relative z-10 font-bold">Enter</span>
-      <div class="absolute inset-0 shimmer-anim opacity-30"></div>
+    <span class="relative z-10 font-bold">
+        Enter Celebration
+    </span>
 
-    </button>
+    <span class="spark spark1"></span>
+    <span class="spark spark2"></span>
+    <span class="spark spark3"></span>
+
+</button>
+
+<style>
+.cracker-btn{
+    position:relative;
+    overflow:hidden;
+    border:1px solid #D4AF37;
+    color:#D4AF37;
+    background:rgba(212,175,55,.08);
+}
+
+/* Moving Golden Fire */
+.cracker-btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-150%;
+    width:50%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.9),
+        #FFD700,
+        rgba(255,255,255,0.9),
+        transparent
+    );
+
+    filter:blur(8px);
+
+    animation:fireRun 1.8s linear infinite;
+}
+
+@keyframes fireRun{
+    0%{
+        left:-150%;
+    }
+
+    100%{
+        left:150%;
+    }
+}
+
+/* Extra Glow */
+.cracker-btn{
+    box-shadow:
+    0 0 10px rgba(212,175,55,.4),
+    inset 0 0 10px rgba(212,175,55,.2);
+}
+
+.cracker-btn:hover{
+    box-shadow:
+    0 0 20px #D4AF37,
+    0 0 40px #D4AF37,
+    0 0 60px #D4AF37;
+}
+
+.cracker-btn:hover{
+    transform:scale(1.08);
+    box-shadow:
+        0 0 20px #D4AF37,
+        0 0 40px #D4AF37,
+        0 0 60px #D4AF37;
+}
+
+.spark{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#FFD700;
+    opacity:0;
+}
+
+.cracker-btn:hover .spark{
+    animation:sparkBlast .8s ease-out infinite;
+}
+
+.spark1{
+    top:50%;
+    left:50%;
+}
+
+.spark2{
+    top:50%;
+    left:50%;
+    animation-delay:.2s;
+}
+
+.spark3{
+    top:50%;
+    left:50%;
+    animation-delay:.4s;
+}
+
+@keyframes sparkBlast{
+
+    0%{
+        transform:translate(0,0) scale(0);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+        translate(
+            calc((rand - .5)*100px),
+            calc((rand - .5)*100px)
+        )
+        scale(1.5);
+        opacity:0;
+    }
+}
+
+.spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkle 1s linear forwards;
+}
+
+@keyframes sparkle {
+    0% {
+        transform: translate(0,0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--x), var(--y)) scale(0);
+        opacity: 0;
+    }
+}
+</style>
+
+<script>
+
+const btn = document.getElementById("enterBtn");
+
+btn.addEventListener("mousemove", (e) => {
+
+    for(let i=0;i<40;i++){
+
+        const spark = document.createElement("span");
+        spark.classList.add("spark");
+
+        spark.style.left =
+            e.offsetX + "px";
+
+        spark.style.top =
+            e.offsetY + "px";
+
+        spark.style.setProperty(
+            "--x",
+            (Math.random()*100 - 50) + "px"
+        );
+
+        spark.style.setProperty(
+            "--y",
+            (Math.random()*100 - 50) + "px"
+        );
+
+        btn.appendChild(spark);
+
+        setTimeout(()=>{
+            spark.remove();
+        },1000);
+    }
+
+});
+
+
+</script>
+
+<!-- Loader code ending -->
 
   </div>
 </div>
@@ -167,6 +350,7 @@ video {
 
 <!-- ================= HERO SECTION ================= -->
 <section class="relative min-h-[100svh] flex items-end px-4 pb-6 overflow-hidden">
+    <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
 
   <!-- BACKGROUND IMAGE -->
   <img src="https://images.unsplash.com/photo-1609101466601-b60143ee4274?auto=format&w=800&q=80&fit=crop"
@@ -178,71 +362,397 @@ video {
   <!-- CARD -->
   <div class="glass w-full max-w-[430px] mx-auto rounded-3xl p-6 text-center relative z-10">
 
-    <span class="text-[10px] uppercase tracking-[0.4em] text-white/60 mb-2 block">
-      Assalamu Alaikum
+    <div class="mb-3">
+    <span class="text-[10px] uppercase tracking-[0.5em] text-white/60 block">
+        Assalamu Alaikum
     </span>
+</div>
 
-    <h1 class="font-heading text-4xl sm:text-5xl gold-gradient-text leading-tight mb-4">
-      Zubair <br>& Hameeda
-    </h1>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <p class="text-xs opacity-60 italic mb-6">
-      Together with families, inviting you.
-    </p>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <div class="flex justify-center gap-2">
-      <span class="w-1.5 h-1.5 bg-[#D4AF37] rounded-full"></span>
-      <span class="w-1.5 h-1.5 bg-[#D4AF37]/50 rounded-full"></span>
-      <span class="w-1.5 h-1.5 bg-[#D4AF37]/30 rounded-full"></span>
-    </div>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+<p id="typing-shayari"
+   style="font-family:'Cormorant Garamond',serif;"
+   class="text-xl sm:text-2xl gold-gradient-text leading-relaxed italic max-w-[320px] mx-auto">
+</p>
+ 
   </div>
 
 </section>
 
-    
-    <section class="py-16 px-6 relative z-10 -mt-10" data-kid="24">
-      <div class="flex items-center gap-4 mb-10 overflow-x-auto snap-x px-2 pb-4 scrollbar-hide" data-kid="25">
-        <div class="snap-center shrink-0 w-[280px] aspect-[3/4] rounded-[2rem] overflow-hidden glass relative group" data-kid="26">
-          <img src="https://images.unsplash.com/photo-1568826912061-98befac09d23?auto=format&w=600&q=80&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" data-kid="27">
-          <div class="absolute inset-0 bg-black/20" data-kid="28"></div>
-        </div>
-        <div class="snap-center shrink-0 w-[280px] aspect-[3/4] rounded-[2rem] overflow-hidden glass relative group" data-kid="29">
-          <img src="https://images.unsplash.com/photo-1640273296013-e4b54eaf52eb?auto=format&w=600&q=80&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" data-kid="30">
-          <div class="absolute inset-0 bg-black/20" data-kid="31"></div>
-        </div>
-        <div class="snap-center shrink-0 w-[280px] aspect-[3/4] rounded-[2rem] overflow-hidden glass relative group" data-kid="32">
-          <img src="https://images.pexels.com/photos/4636394/pexels-photo-4636394.jpeg?auto=compress&cs=tinysrgb&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" data-kid="33">
-          <div class="absolute inset-0 bg-black/20" data-kid="34"></div>
-        </div>
-      </div>
-      <div class="text-center" data-kid="35">
-        <h2 class="font-heading text-4xl gold-gradient-text mb-4 italic" data-kid="36">A Love Written in the Stars</h2>
-        <p class="text-xs opacity-50 tracking-widest uppercase" data-kid="37">Swipe to see our memories</p>
-      </div>
-    </section>
+<style>#typing-shayari::after{
+    content:"|";
+    color:#D4AF37;
+    animation:blink .8s infinite;
+}
 
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+.sparkles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #FFD700;
+    opacity: 0;
+    animation: sparkleMove linear infinite;
+}
+
+@keyframes sparkleMove {
+    0% {
+        transform: translateY(100%) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120%) scale(1);
+        opacity: 0;
+    }
+}
+
+</style>
+
+<script>
+const shayari =
+`Qismat ne likha ek khoobsurat afsana hai, 
+Do dilon ka milna Rab ka nazrana hai. 
+Khushi ke is mubarak mauke par aapko bhi aana hai, 
+Aapki tashreef-aawari hamari masarrat hai.`;
+
+let i = 0;
+const speed = 40;
+
+function typeWriter() {
+
+    if (i < shayari.length) {
+
+        document.getElementById("typing-shayari").innerHTML +=
+            shayari.charAt(i);
+
+        i++;
+
+        setTimeout(typeWriter, speed);
+    }
+}
+
+window.addEventListener("load", typeWriter);
+
+
+document.querySelectorAll('.sparkles').forEach(container => {
+
+    for (let i = 0; i < 10; i++) {
+
+        const s = document.createElement('span');
+
+        s.style.left = Math.random() * 100 + '%';
+
+        s.style.animationDelay = Math.random() * 5 + 's';
+
+        s.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+        container.appendChild(s);
+    }
+
+});
+
+</script>
+
+    
+<section class="py-20 px-6">
+
+<div class="glass invitation-card rounded-[2rem] p-8 text-center relative overflow-hidden">
+    <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
+
+    <div class="absolute top-0 left-0 w-full h-1 gold-gradient-bg"></div>
+
+    <div class="mb-8">
+        <h2 class="gold-gradient-text text-4xl font-heading mb-2">
+            بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْم
+        </h2>
+
+        <p class="text-[10px] tracking-[0.4em] uppercase text-white/40">
+            In The Name Of Allah
+        </p>
+    </div>
+
+    <div class="space-y-4 invitation-content">
+
+        <p class="text-white/60 italic">
+            Together with their families
+        </p>
+
+        <h3 class="font-heading text-2xl gold-gradient-text">
+            Mr. & Mrs. Shaik Abdul Vaheed
+        </h3>
+
+        <p class="text-white/70 leading-relaxed">
+            Cordially invite you to grace the
+            auspicious Nikah Ceremony of
+        </p>
+        <h3 class="font-heading text-2xl gold-gradient-text">
+Noore-E-Chashmi:
+</h3>
+
+        <div class="my-8">
+            <h2 class="font-script text-5xl gold-gradient-text">
+                Dr.Sk. Hameeda
+            </h2>
+
+            <span class="text-[10px] tracking-[0.3em] uppercase text-white/40">
+                MBBS
+            </span>
+
+        </div>
+
+        <p class="invite-line">
+Elder Grand Daughter of
+Mr. & Mrs. Sk. Abdul Khuddus (Late) &amp; Mr. & Mrs. Nanhe Saheb
+</p>
+
+
+
+        <div class="text-4xl gold-gradient-text my-4">
+            with
+        </div>
+
+        <h3 class="font-heading text-2xl gold-gradient-text">
+Barkhurdar:
+</h3>
+        <div class="mb-8">
+            <h2 class="font-script text-5xl gold-gradient-text">
+                Sk. Zubair
+            </h2>
+
+            <span class="text-[10px] tracking-[0.3em] uppercase text-white/40">
+                B.Tech
+            </span>
+        </div>
+
+        <p class="text-white/60">
+            Beloved Son of
+        </p>
+
+        <p class="text-white/60">
+            Mr. Salaar & Mrs. [Mother Name]
+        </p>
+
+        <div class="w-24 h-[1px] bg-[#D4AF37]/30 mx-auto my-8"></div>
+
+                <div class="mt-10">
+            <p class="text-lg gold-gradient-text italic">
+                Awaiting for your presence
+            </p>
+
+            <p class="text-lg gold-gradient-text italic">
+                Mr. & Mrs. Nanhe Saheb & All Family members
+            </p>
+
+            
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<style>
+    .invite-box{
+    position:relative;
+    padding:40px 25px;
+    border-radius:32px;
+
+    background:
+    rgba(255,255,255,0.03);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(212,175,55,.25);
+
+    overflow:hidden;
+
+    box-shadow:
+    0 0 30px rgba(212,175,55,.08);
+
+    animation:
+    floatCard 5s ease-in-out infinite;
+}
+
+.invite-box::before{
+    content:"";
+
+    position:absolute;
+    top:-100%;
+    left:-100%;
+
+    width:250%;
+    height:250%;
+
+    background:
+    linear-gradient(
+    45deg,
+    transparent,
+    rgba(212,175,55,.08),
+    transparent
+    );
+
+    animation:
+    shine 8s linear infinite;
+}
+
+@keyframes shine{
+    100%{
+        transform:
+        translate(40%,40%);
+    }
+}
+
+@keyframes floatCard{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+.invite-content{
+    position:relative;
+    z-index:2;
+}
+
+.invite-line{
+    color:rgba(255,255,255,.75);
+    font-size:14px;
+    line-height:1.9;
+    margin-bottom:18px;
+
+    animation:
+    fadeUp 1s ease forwards;
+}
+
+.invite-title{
+    font-size:28px;
+    margin:25px 0;
+}
+
+.invite-name{
+    font-size:32px;
+    line-height:1.4;
+    margin:25px 0;
+}
+
+.divider{
+    width:80px;
+    height:1px;
+    margin:30px auto;
+
+    background:
+    linear-gradient(
+    to right,
+    transparent,
+    #D4AF37,
+    transparent
+    );
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.sparkles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #FFD700;
+    opacity: 0;
+    animation: sparkleMove linear infinite;
+}
+
+@keyframes sparkleMove {
+    0% {
+        transform: translateY(100%) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120%) scale(1);
+        opacity: 0;
+    }
+}
+
+    </style>
+
+<script>
+document.querySelectorAll('.sparkles').forEach(container => {
+
+    for (let i = 0; i < 10; i++) {
+
+        const s = document.createElement('span');
+
+        s.style.left = Math.random() * 100 + '%';
+
+        s.style.animationDelay = Math.random() * 5 + 's';
+
+        s.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+        container.appendChild(s);
+    }
+
+});
+</script>
     
     
 
     
 <section class="py-20 px-8 text-center bg-black/20">
+    <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
 
   <h3 class="font-script text-4xl sm:text-4xl sm:text-5xl md:text-6xl gold-gradient-text text-center mb-4">
     Nikah Date
   </h3>
 
   <div class="relative w-full aspect-square max-w-[300px] mx-auto">
+    
 
     <!-- REVEALED CARD -->
     <div id="dateReveal"
          class="absolute inset-0 glass rounded-[2.5rem] flex flex-col items-center justify-center border-[#D4AF37]/20 border-2">
+         <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
 
       <span class="font-heading text-7xl gold-gradient-text mb-2">8</span>
       <span class="text-xl tracking-[0.5em] uppercase gold-gradient-text">August</span>
       <span class="text-xs opacity-50 mt-4 tracking-widest">Saturday, 2026</span>
 
       <div class="mt-8 px-4 py-2 rounded-full glass border-[#D4AF37]/30">
+        
         <span class="text-[9px] uppercase tracking-widest gold-gradient-text">
           Save the Date
         </span>
@@ -294,6 +804,34 @@ video {
     opacity:1;
   }
 }
+
+.sparkles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #FFD700;
+    opacity: 0;
+    animation: sparkleMove linear infinite;
+}
+
+@keyframes sparkleMove {
+    0% {
+        transform: translateY(100%) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120%) scale(1);
+        opacity: 0;
+    }
+}
+
 </style>
 
 <script>
@@ -391,8 +929,28 @@ dateCard.addEventListener("click",()=>{
 
 });
 
+
+document.querySelectorAll('.sparkles').forEach(container => {
+
+    for (let i = 0; i < 25; i++) {
+
+        const s = document.createElement('span');
+
+        s.style.left = Math.random() * 100 + '%';
+
+        s.style.animationDelay = Math.random() * 5 + 's';
+
+        s.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+        container.appendChild(s);
+    }
+
+});
+
+
 </script>
 
+<!-- Golden card reveal with crackers -->
 
     
    <section class="py-24 px-8">
@@ -480,9 +1038,11 @@ setInterval(updateCountdown, 1000);
 
     <!-- clebration section -->
     <section class="py-20 px-8" data-kid="88">
+        
       <h2 class="font-script text-5xl md:text-5xl gold-gradient-text text-center mb-4">The Celebration</h2>
       
       <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
+        <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
 
     <div class="flex justify-between items-start mb-8">
 
@@ -538,6 +1098,7 @@ setInterval(updateCountdown, 1000);
 
       
       <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
+        <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
 
     <div class="flex justify-between items-start mb-8">
 
@@ -593,6 +1154,7 @@ setInterval(updateCountdown, 1000);
 
         
         <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
+            <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
 
     <div class="flex justify-between items-start mb-8">
 
@@ -645,6 +1207,7 @@ setInterval(updateCountdown, 1000);
     </div>
 
 </div>
+</section>
 
 <style>
   /* EVENT CARDS */
@@ -706,11 +1269,60 @@ setInterval(updateCountdown, 1000);
     color:#ffd900;
     letter-spacing:1px;
 }
-  </style>
 
+.sparkles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #FFD700;
+    opacity: 0;
+    animation: sparkleMove linear infinite;
+}
+
+@keyframes sparkleMove {
+    0% {
+        transform: translateY(100%) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120%) scale(1);
+        opacity: 0;
+    }
+}
+
+</style>
+
+
+<script>
+document.querySelectorAll('.sparkles').forEach(container => {
+
+    for (let i = 0; i < 50; i++) {
+
+        const s = document.createElement('span');
+
+        s.style.left = Math.random() * 100 + '%';
+
+        s.style.animationDelay = Math.random() * 5 + 's';
+
+        s.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+        container.appendChild(s);
+    }
+
+});
+</script>
     
     <section class="py-20 px-8" data-kid="129">
+        
       <div class="glass rounded-[2.5rem] overflow-hidden relative" data-kid="130">
+        <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
         <div class="h-64 bg-[#001933] relative" data-kid="131">
           
           <img src="https://images.unsplash.com/photo-1675250999277-08e911d4849f?auto=format&w=800&q=80&fit=crop" class="w-full h-full object-cover opacity-40 grayscale" decoding="async" loading="lazy" data-kid="132">
@@ -740,6 +1352,246 @@ setInterval(updateCountdown, 1000);
       </div>
     </section>
 
+<style>
+    .sparkles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #FFD700;
+    opacity: 0;
+    animation: sparkleMove linear infinite;
+}
+
+@keyframes sparkleMove {
+    0% {
+        transform: translateY(100%) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120%) scale(1);
+        opacity: 0;
+    }
+}
+</style>
+
+<script>
+document.querySelectorAll('.sparkles').forEach(container => {
+
+    for (let i = 0; i < 50; i++) {
+
+        const s = document.createElement('span');
+
+        s.style.left = Math.random() * 100 + '%';
+
+        s.style.animationDelay = Math.random() * 5 + 's';
+
+        s.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+        container.appendChild(s);
+    }
+
+});
+</script>
+
+
+<!-- Rings section -->
+<section class="relative py-20 overflow-hidden">
+
+    <!-- Floating Sparkles -->
+    <div class="sparkles"></div>
+    
+
+    <div class="text-center mb-8">
+        <h2 class="font-script text-5xl md:text-5xl gold-gradient-text text-center mb-4">
+            A Beautiful Journey Begins
+        </h2>
+
+        <p class="text-white/60 text-sm mt-2 tracking-widest">
+            Two Hearts • One Destiny
+        </p>
+    </div>
+
+    <div class="couple-slider">
+        <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
+
+        <img
+            src="D:\MD YASEEN\My Projects\wedding invitation\img1.jpg"
+            class="slide active"
+            alt="Couple">
+
+        <img
+            src="D:\MD YASEEN\My Projects\wedding invitation\img2.jpg"
+            class="slide"
+            alt="Couple">
+
+        <img
+            src="D:\MD YASEEN\My Projects\wedding invitation\img3.jpg"
+            class="slide"
+            alt="Couple">
+
+        <img
+            src="D:\MD YASEEN\My Projects\wedding invitation\img4.jpg"
+            class="slide"
+            alt="Couple">
+
+        <img
+            src="D:\MD YASEEN\My Projects\wedding invitation\img5.jpg"
+            class="slide"
+            alt="Couple">
+
+        <img
+            src="D:\MD YASEEN\My Projects\wedding invitation\img6.jpg"
+            class="slide"
+            alt="Couple">
+
+    </div>
+
+</section>
+
+<style>
+.couple-slider{
+    position:relative;
+    width:280px;
+    height:420px;
+    margin:auto;
+    border-radius:30px;
+    overflow:hidden;
+
+    box-shadow:
+    0 0 25px rgba(212,175,55,.25),
+    0 0 50px rgba(212,175,55,.15);
+
+    border:1px solid rgba(212,175,55,.3);
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    opacity:0;
+    transform:scale(1.08);
+
+    transition:
+    opacity 2s ease,
+    transform 2s ease;
+}
+
+.slide.active{
+    opacity:1;
+    transform:scale(1);
+}
+
+/* Golden Glow */
+.couple-slider::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(
+    circle at center,
+    transparent 60%,
+    rgba(212,175,55,.12));
+
+    pointer-events:none;
+}
+
+/* Floating Particles */
+.sparkles{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.sparkles span{
+    position:absolute;
+    width:4px;
+    height:4px;
+
+    background:#FFD700;
+    border-radius:50%;
+
+    box-shadow:0 0 12px #FFD700;
+
+    animation:floatSpark 8s linear infinite;
+}
+
+@keyframes floatSpark{
+
+    0%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-100px);
+        opacity:0;
+    }
+}
+</style>
+
+<script>
+
+/* Image Transition */
+
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+setInterval(() => {
+
+    slides[current].classList.remove('active');
+
+    current = (current + 1) % slides.length;
+
+    slides[current].classList.add('active');
+
+}, 5000);
+
+
+/* Diwali Sparkles */
+
+document.querySelectorAll('.sparkles').forEach(container => {
+
+    for (let i = 0; i < 60; i++) {
+
+        const s = document.createElement('span');
+
+        s.style.left = Math.random() * 100 + '%';
+
+        s.style.animationDelay = Math.random() * 5 + 's';
+
+        s.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+        container.appendChild(s);
+    }
+
+});
+
+</script>
+
+
+
+
+
+
+
     
        <section class="py-20 px-8">
     <h3 class="font-script text-5xl md:text-5xl gold-gradient-text text-center mb-4">
@@ -748,6 +1600,7 @@ setInterval(updateCountdown, 1000);
 
     <!-- Buttons -->
     <div class="glass rounded-full p-1.5 mb-8 flex items-center">
+        <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
         <button id="groomBtn"
             class="flex-1 py-3 rounded-full bg-gradient-to-r from-[#B8860B] to-[#D4AF37] text-black text-[10px] font-bold uppercase tracking-widest">
             Groom's Family
@@ -763,6 +1616,7 @@ setInterval(updateCountdown, 1000);
     <div id="groomFamily" class="space-y-4">
 
         <div class="glass p-5 rounded-2xl flex items-center gap-4 border-l-2 border-[#D4AF37]/40">
+            <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
             <div class="w-12 h-12 rounded-full gold-gradient-bg flex items-center justify-center text-black font-bold">
                 SS
             </div>
@@ -776,6 +1630,7 @@ setInterval(updateCountdown, 1000);
         </div>
 
         <div class="glass p-5 rounded-2xl flex items-center gap-4">
+            <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
             <div class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center">
                 NS
             </div>
@@ -794,6 +1649,7 @@ setInterval(updateCountdown, 1000);
     <div id="brideFamily" class="space-y-4 hidden">
 
         <div class="glass p-5 rounded-2xl flex items-center gap-4 border-l-2 border-pink-400">
+            <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
             <div class="w-12 h-12 rounded-full gold-gradient-bg flex items-center justify-center text-black font-bold">
                 AB
             </div>
@@ -807,6 +1663,7 @@ setInterval(updateCountdown, 1000);
         </div>
 
         <div class="glass p-5 rounded-2xl flex items-center gap-4">
+            <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
             <div class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center">
                 CD
             </div>
@@ -876,42 +1733,55 @@ brideBtn.addEventListener("click", () => {
 </script>
 
     
-    <section class="py-20 px-4" data-kid="157">
-      <h3 class="font-script text-4xl sm:text-4xl sm:text-5xl md:text-6xl gold-gradient-text text-center mb-4">Captured Moments</h3>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" data-kid="159">
-        <img src="https://images.unsplash.com/photo-1562249004-1f7289c19c49?auto=format&w=400&q=80&fit=crop" class="w-full aspect-[4/5] object-cover rounded-2xl border border-white/10 shadow-2xl" decoding="async" loading="lazy" data-kid="160">
-        <img src="https://images.unsplash.com/photo-1593472799419-a17740a9976c?auto=format&w=400&q=80&fit=crop" class="w-full aspect-[4/5] object-cover rounded-2xl border border-white/10 shadow-2xl" decoding="async" loading="lazy" data-kid="161">
-        <img src="https://images.unsplash.com/photo-1535185384036-28bbc8035f28?auto=format&w=400&q=80&fit=crop" class="w-full aspect-[4/5] object-cover rounded-2xl border border-white/10 shadow-2xl" decoding="async" loading="lazy" data-kid="162">
-        <img src="https://images.pexels.com/photos/31563062/pexels-photo-31563062.jpeg?auto=compress&cs=tinysrgb&w=400&q=80" class="w-full aspect-[4/5] object-cover rounded-2xl border border-white/10 shadow-2xl" decoding="async" loading="lazy" data-kid="163">
-        <img src="https://images.unsplash.com/photo-1566325645218-73b67fd824a2?auto=format&w=400&q=80&fit=crop" class="w-full aspect-[4/5] object-cover rounded-2xl border border-white/10 shadow-2xl" decoding="async" loading="lazy" data-kid="164">
-        <img src="https://images.unsplash.com/photo-1620650893164-fb56b7e66067?auto=format&w=400&q=80&fit=crop" class="w-full aspect-[4/5] object-cover rounded-2xl border border-white/10 shadow-2xl" decoding="async" loading="lazy" data-kid="165">
-      </div>
-    </section>
-
     
 
     
-    <section class="relative min-h-[100svh] flex flex-col justify-end px-5 pb-8 overflow-hidden">
-      <div class="absolute inset-0 w-full h-full overflow-hidden">
-  <video class="w-full h-full object-cover scale-110 sm:scale-100"
-         autoplay muted loop playsinline>
-      <video class="absolute inset-0 w-full h-full object-cover opacity-50 scale-110 md:scale-100" src="https://videos.pexels.com/video-files/10203124/10203124-hd_720_1280_30fps.mp4" poster="https://images.pexels.com/videos/10203124/bright-lights-burst-crackers-deepawali-10203124.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630" autoplay muted loop playsinline data-kid="187"></video>
-      <div class="relative z-10 text-center" data-kid="188">
-        <h2 class="font-heading text-6xl gold-gradient-text mb-8 italic fade-up" data-kid="189">Thank You</h2>
-        <p class="text-xs opacity-60 tracking-[0.3em] uppercase max-w-[200px] mx-auto leading-relaxed" data-kid="190">For being a part of our beautiful journey.</p>
-        <div class="mt-20 flex flex-col items-center gap-4" data-kid="191">
-          <img src="https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/lorc/lotus.svg" class="w-12 h-12 opacity-30" style="filter: brightness(0) invert(1);" data-kid="192">
-          <span class="text-[9px] uppercase tracking-[0.5em] text-white/30" data-kid="193">August 2024</span>
+<section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+
+    <!-- Background Video -->
+    <video
+        class="absolute inset-0 w-full h-full object-cover opacity-50"
+        src="https://videos.pexels.com/video-files/10203124/10203124-hd_720_1280_30fps.mp4"
+        poster="https://images.pexels.com/videos/10203124/bright-lights-burst-crackers-deepawali-10203124.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630"
+        autoplay
+        muted
+        loop
+        playsinline>
+    </video>
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center px-6">
+
+        <h2 class="font-script text-6xl md:text-7xl gold-gradient-text mb-8 fade-up">
+            Thank You
+        </h2>
+
+        <p class="text-sm opacity-70 tracking-[0.2em] uppercase max-w-[260px] mx-auto leading-relaxed">
+            For being a part of our beautiful journey.
+        </p>
+
+        <div class="mt-16 flex flex-col items-center gap-4">
+
+            <img
+                src="https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/lorc/lotus.svg"
+                class="w-12 h-12 opacity-40"
+                style="filter: brightness(0) invert(1);">
+
+            <span class="text-[10px] uppercase tracking-[0.5em] text-white/40">
+                August 2026
+            </span>
+
         </div>
-      </div>
-    </section>
+
+    </div>
+
+</section>
 
     
-    <div class="absolute top-[640px] right-6 z-50" data-kid="194">
-      <button class="w-12 h-12 rounded-full glass flex items-center justify-center border-[#D4AF37]/30 text-[#D4AF37] shadow-lg active:scale-90 transition-transform" data-kid="195">
-        <i class="ti ti-music text-xl" data-kid="196"></i>
-      </button>
-    </div>
+    
 
 
     <!-- Flower Petals -->
@@ -980,11 +1850,49 @@ function createPetal() {
     }, 12000);
 }
 
-setInterval(createPetal, 220);
+setInterval(createPetal, 100);
 </script>
 
 
 <canvas id="fireworks"></canvas>
+
+
+<!-- Auto Scroll -->
+
+<script>
+let scrollSpeed = 1;
+
+function autoScroll() {
+  window.scrollBy(0, scrollSpeed);
+
+  const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const fullHeight = document.body.scrollHeight;
+
+  if (scrollTop + windowHeight >= fullHeight - 5) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return; // restart after reset
+  }
+
+  requestAnimationFrame(autoScroll);
+}
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    autoScroll();
+  }, 3000);
+});
+</script>
+
+<style>
+    html, body {
+  height: auto;
+  overflow-y: auto;
+}
+main {
+  min-height: 500vh;
+}
+</style>
 
   </main>
 </body>
