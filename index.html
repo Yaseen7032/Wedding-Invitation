@@ -142,9 +142,10 @@ video {
   <!-- CONTENT -->
   <div class="relative z-10 text-center px-6">
 
-    <img src="https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/lorc/concentric-crescents.svg"
-         class="w-16 h-16 mx-auto mb-6 opacity-80"
-         style="filter: invert(72%) sepia(21%) saturate(1022%) hue-rotate(1deg);">
+    <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f319.svg"
+     class="w-16 h-16 mx-auto mb-6 gold-moon">
+
+
 
     <h2 class="font-heading italic text-xl gold-gradient-text mb-3">
       بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
@@ -300,6 +301,33 @@ class="cracker-btn relative px-12 py-4 rounded-full overflow-hidden cursor-point
         transform: translate(var(--x), var(--y)) scale(0);
         opacity: 0;
     }
+}
+
+.gold-moon{
+  filter: brightness(0) invert(1)
+          sepia(1)
+          saturate(12)
+          hue-rotate(10deg);
+  animation: goldPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes goldPulse{
+  0%,100%{
+    transform: scale(1);
+    filter: brightness(0) invert(1)
+            sepia(1)
+            saturate(10)
+            hue-rotate(10deg)
+            drop-shadow(0 0 8px rgba(212, 196, 55, 0.921));
+  }
+  50%{
+    transform: scale(1.1);
+    filter: brightness(0) invert(1)
+            sepia(1)
+            saturate(14)
+            hue-rotate(10deg)
+            drop-shadow(0 0 18px rgba(222, 217, 57, 0.9));
+  }
 }
 </style>
 
@@ -1203,32 +1231,32 @@ setInterval(updateCountdown, 1000);
         <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
 
         <img
-            src="img1.jpg"
+            src="images/img1.jpg"
             class="slide active"
             alt="Couple">
 
         <img
-            src="img2.jpg"
+            src="images/img2.jpg"
             class="slide"
             alt="Couple">
 
         <img
-            src="img3.jpg"
+            src="images/img3.jpg"
             class="slide"
             alt="Couple">
 
         <img
-            src="img4.jpg"
+            src="images/img4.jpg"
             class="slide"
             alt="Couple">
 
         <img
-            src="img5.jpg"
+            src="images/img5.jpg"
             class="slide"
             alt="Couple">
 
         <img
-            src="img6.jpg"
+            src="images/img6.jpg"
             class="slide"
             alt="Couple">
 
@@ -1552,7 +1580,7 @@ brideBtn.addEventListener("click", () => {
                 style="filter: brightness(0) invert(1);">
 
             <span class="text-[10px] uppercase tracking-[0.5em] text-white/40">
-                Md Yaseen Creations
+                August 2026
             </span>
 
         </div>
