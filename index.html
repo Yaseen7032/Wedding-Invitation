@@ -350,7 +350,7 @@ btn.addEventListener("mousemove", (e) => {
 
 <!-- ================= HERO SECTION ================= -->
 <section class="relative min-h-[100svh] flex items-end px-4 pb-6 overflow-hidden">
-    <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
+    
 
   <!-- BACKGROUND IMAGE -->
   <img src="https://images.unsplash.com/photo-1609101466601-b60143ee4274?auto=format&w=800&q=80&fit=crop"
@@ -397,33 +397,6 @@ btn.addEventListener("mousemove", (e) => {
     }
 }
 
-.sparkles span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #FFD700;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #FFD700;
-    opacity: 0;
-    animation: sparkleMove linear infinite;
-}
-
-@keyframes sparkleMove {
-    0% {
-        transform: translateY(100%) scale(0);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-120%) scale(1);
-        opacity: 0;
-    }
-}
-
 </style>
 
 <script>
@@ -452,22 +425,7 @@ function typeWriter() {
 window.addEventListener("load", typeWriter);
 
 
-document.querySelectorAll('.sparkles').forEach(container => {
 
-    for (let i = 0; i < 10; i++) {
-
-        const s = document.createElement('span');
-
-        s.style.left = Math.random() * 100 + '%';
-
-        s.style.animationDelay = Math.random() * 5 + 's';
-
-        s.style.animationDuration = (4 + Math.random() * 4) + 's';
-
-        container.appendChild(s);
-    }
-
-});
 
 </script>
 
@@ -475,7 +433,7 @@ document.querySelectorAll('.sparkles').forEach(container => {
 <section class="py-20 px-6">
 
 <div class="glass invitation-card rounded-[2rem] p-8 text-center relative overflow-hidden">
-    <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
+    
 
     <div class="absolute top-0 left-0 w-full h-1 gold-gradient-bg"></div>
 
@@ -681,59 +639,15 @@ Barkhurdar:
     }
 }
 
-.sparkles span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #FFD700;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #FFD700;
-    opacity: 0;
-    animation: sparkleMove linear infinite;
-}
 
-@keyframes sparkleMove {
-    0% {
-        transform: translateY(100%) scale(0);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-120%) scale(1);
-        opacity: 0;
-    }
-}
 
     </style>
 
-<script>
-document.querySelectorAll('.sparkles').forEach(container => {
-
-    for (let i = 0; i < 10; i++) {
-
-        const s = document.createElement('span');
-
-        s.style.left = Math.random() * 100 + '%';
-
-        s.style.animationDelay = Math.random() * 5 + 's';
-
-        s.style.animationDuration = (4 + Math.random() * 4) + 's';
-
-        container.appendChild(s);
-    }
-
-});
-</script>
-    
     
 
     
 <section class="py-20 px-8 text-center bg-black/20">
-    <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
+    
 
   <h3 class="font-script text-4xl sm:text-4xl sm:text-5xl md:text-6xl gold-gradient-text text-center mb-4">
     Nikah Date
@@ -805,32 +719,6 @@ document.querySelectorAll('.sparkles').forEach(container => {
   }
 }
 
-.sparkles span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #FFD700;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #FFD700;
-    opacity: 0;
-    animation: sparkleMove linear infinite;
-}
-
-@keyframes sparkleMove {
-    0% {
-        transform: translateY(100%) scale(0);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-120%) scale(1);
-        opacity: 0;
-    }
-}
 
 </style>
 
@@ -930,23 +818,6 @@ dateCard.addEventListener("click",()=>{
 });
 
 
-document.querySelectorAll('.sparkles').forEach(container => {
-
-    for (let i = 0; i < 25; i++) {
-
-        const s = document.createElement('span');
-
-        s.style.left = Math.random() * 100 + '%';
-
-        s.style.animationDelay = Math.random() * 5 + 's';
-
-        s.style.animationDuration = (4 + Math.random() * 4) + 's';
-
-        container.appendChild(s);
-    }
-
-});
-
 
 </script>
 
@@ -1042,8 +913,7 @@ setInterval(updateCountdown, 1000);
       <h2 class="font-script text-5xl md:text-5xl gold-gradient-text text-center mb-4">The Celebration</h2>
       
       <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
-        <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
-
+        
     <div class="flex justify-between items-start mb-8">
 
         <div>
@@ -1098,7 +968,7 @@ setInterval(updateCountdown, 1000);
 
       
       <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
-        <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
+        
 
     <div class="flex justify-between items-start mb-8">
 
@@ -1154,7 +1024,7 @@ setInterval(updateCountdown, 1000);
 
         
         <div class="event-card glass rounded-[2rem] p-5 sm:p-8 max-w-[430px] mx-auto w-full border-l-4 border-[#D4AF37]">
-            <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
+            
 
     <div class="flex justify-between items-start mb-8">
 
@@ -1270,59 +1140,16 @@ setInterval(updateCountdown, 1000);
     letter-spacing:1px;
 }
 
-.sparkles span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #FFD700;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #FFD700;
-    opacity: 0;
-    animation: sparkleMove linear infinite;
-}
 
-@keyframes sparkleMove {
-    0% {
-        transform: translateY(100%) scale(0);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-120%) scale(1);
-        opacity: 0;
-    }
-}
 
 </style>
 
 
-<script>
-document.querySelectorAll('.sparkles').forEach(container => {
-
-    for (let i = 0; i < 50; i++) {
-
-        const s = document.createElement('span');
-
-        s.style.left = Math.random() * 100 + '%';
-
-        s.style.animationDelay = Math.random() * 5 + 's';
-
-        s.style.animationDuration = (4 + Math.random() * 4) + 's';
-
-        container.appendChild(s);
-    }
-
-});
-</script>
     
     <section class="py-20 px-8" data-kid="129">
         
       <div class="glass rounded-[2.5rem] overflow-hidden relative" data-kid="130">
-        <div class="sparkles absolute inset-0 overflow-hidden pointer-events-none"></div>
+        
         <div class="h-64 bg-[#001933] relative" data-kid="131">
           
           <img src="https://images.unsplash.com/photo-1675250999277-08e911d4849f?auto=format&w=800&q=80&fit=crop" class="w-full h-full object-cover opacity-40 grayscale" decoding="async" loading="lazy" data-kid="132">
@@ -1352,53 +1179,7 @@ document.querySelectorAll('.sparkles').forEach(container => {
       </div>
     </section>
 
-<style>
-    .sparkles span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #FFD700;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #FFD700;
-    opacity: 0;
-    animation: sparkleMove linear infinite;
-}
 
-@keyframes sparkleMove {
-    0% {
-        transform: translateY(100%) scale(0);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-120%) scale(1);
-        opacity: 0;
-    }
-}
-</style>
-
-<script>
-document.querySelectorAll('.sparkles').forEach(container => {
-
-    for (let i = 0; i < 50; i++) {
-
-        const s = document.createElement('span');
-
-        s.style.left = Math.random() * 100 + '%';
-
-        s.style.animationDelay = Math.random() * 5 + 's';
-
-        s.style.animationDuration = (4 + Math.random() * 4) + 's';
-
-        container.appendChild(s);
-    }
-
-});
-</script>
 
 
 <!-- Rings section -->
@@ -1860,7 +1641,7 @@ setInterval(createPetal, 100);
 <!-- Auto Scroll -->
 
 <script>
-let scrollSpeed = 1;
+let scrollSpeed = 1.5;
 
 function autoScroll() {
   window.scrollBy(0, scrollSpeed);
@@ -1880,7 +1661,7 @@ function autoScroll() {
 window.addEventListener("load", () => {
   setTimeout(() => {
     autoScroll();
-  }, 3000);
+  }, 1000);
 });
 </script>
 
